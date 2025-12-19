@@ -1,0 +1,52 @@
+Maximum subarray:
+
+Given an integer array nums, find the subarray with the largest sum, and return its sum.
+Example 1:
+
+Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6
+Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+Example 2:
+
+Input: nums = [1]
+Output: 1
+Explanation: The subarray [1] has the largest sum 1.
+
+code:
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum = 0;
+        int max = Integer.MIN_VALUE;
+        for(int num: nums){
+            sum += num;
+            max = Math.max(max,sum);
+            if(sum<0) sum =0;
+        }
+        return max;
+    }
+}
+
+Intution: (kadane's algorithm)
+The variable sum keeps track of the current subarray sum as you iterate.
+
+If sum ever becomes negative, you reset it to 0 because a negative prefix would only reduce the sum of any future subarray.
+
+The variable max keeps track of the maximum sum seen so far.
+
+At each step:
+
+Add the current element to sum.
+
+Update max if sum is larger.
+
+If sum drops below 0, reset it (start fresh).
+
+This way, you’re always carrying forward the best possible subarray sum without dragging negative sums along.
+
+Complexity
+Time Complexity: 𝑂(𝑛)
+ → You scan the array once, updating sum and max in constant time per element.
+
+Space Complexity: 𝑂(1)
+ → Only two variables (sum and max) are used, regardless of input size.
